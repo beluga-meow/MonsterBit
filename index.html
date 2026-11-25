@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#14251f" />
+  <meta name="description" content="MonsterBit — discover, capture, evolve, and conquer." />
+  <title>MonsterBit — Online Creature Adventure</title>
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <a class="brand" href="#"><span class="brand-mark">M</span> MONSTERBIT</a>
+      <div class="topbar-right">
+        <span id="connection-status" class="status-pill">Connecting…</span>
+        <button id="logout-button" class="button button-quiet hidden">Log out</button>
+      </div>
+    </header>
+
+    <main>
+      <section id="auth-screen" class="auth-layout">
+        <div class="hero-panel">
+          <p class="eyebrow">A WORLD WAITING TO BE DISCOVERED</p>
+          <h1>Find your next<br><span>great adventure.</span></h1>
+          <p class="hero-copy">Explore a living world, meet unusual creatures, and build a team that's yours.</p>
+          <div class="hero-tags"><span>EXPLORE</span><span>CAPTURE</span><span>EVOLVE</span></div>
+        </div>
+        <div class="auth-card">
+          <div class="auth-tabs">
+            <button id="login-tab" class="tab active">Log in</button>
+            <button id="register-tab" class="tab">Create account</button>
+          </div>
+          <form id="auth-form">
+            <label>Email address<input id="email" type="email" autocomplete="email" placeholder="you@example.com" required /></label>
+            <label>Password<input id="password" type="password" autocomplete="current-password" minlength="8" placeholder="At least 8 characters" required /></label>
+            <label id="username-label" class="hidden">Trainer name<input id="username" type="text" maxlength="20" placeholder="Your trainer name" /></label>
+            <button id="auth-submit" class="button button-primary full" type="submit">Log in</button>
+            <p id="auth-message" class="form-message" aria-live="polite"></p>
+          </form>
+          <p class="fine-print">An account is required to enter MonsterBit. Use an email you can access.</p>
+        </div>
+      </section>
+
+      <section id="game-screen" class="game-layout hidden">
+        <aside class="sidebar">
+          <div class="trainer-card">
+            <div class="avatar">✦</div>
+            <div><strong id="trainer-name">Trainer</strong><small>Rookie Trainer</small></div>
+          </div>
+          <nav class="side-nav">
+            <button class="nav-item active" data-panel="world">◈ <span>World</span></button>
+            <button class="nav-item" data-panel="dex">▦ <span>MonsterDex</span></button>
+            <button class="nav-item" data-panel="party">✧ <span>My Party</span></button>
+          </nav>
+          <div class="sidebar-note"><span class="live-dot"></span> Connected session</div>
+        </aside>
+
+        <section class="game-content">
+          <div class="welcome-row">
+            <div><p class="eyebrow">VERDANTIA · STARTER REGION</p><h2 id="panel-title">Verdantia Outskirts</h2></div>
+            <div class="player-level"><span>TRAINER LEVEL</span><strong>01</strong></div>
+          </div>
+
+          <section id="world-panel" class="panel">
+            <div class="world-toolbar">
+              <div><strong>Explore the world</strong><small>WASD / Arrow keys to move · Find the guide near the path</small></div>
+              <span class="map-chip">● Verdantia</span>
+            </div>
+            <div id="game-container" class="game-container">
+              <div class="canvas-hint">Loading your world…</div>
+            </div>
+            <div class="world-footer">
+              <span><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> Move</span>
+              <span><kbd>↑</kbd><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd> Move</span>
+              <span>Approach the guide to start a practice battle.</span>
+            </div>
+          </section>
+
+          <section id="dex-panel" class="panel hidden">
+            <div class="section-heading"><div><h3>MonsterDex</h3><p>Meet the first creatures discovered in MonsterBit.</p></div></div>
+            <div id="dex-grid" class="creature-grid"></div>
+          </section>
+
+          <section id="party-panel" class="panel hidden">
+            <div class="section-heading"><div><h3>Your party</h3><p>Your starter team will appear here as you discover creatures.</p></div></div>
+            <div class="empty-state"><span>✧</span><strong>Your adventure is just beginning.</strong><p>Creature capture and persistent party management are planned next.</p></div>
+          </section>
+        </section>
+      </section>
+    </main>
+    <div id="battle-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="battle-title">
+      <div class="battle-card">
+        <div class="battle-top"><span class="eyebrow">PRACTICE ENCOUNTER</span><button id="battle-close" class="icon-button" aria-label="Close battle">×</button></div>
+        <h2 id="battle-title">A wild creature appears!</h2>
+        <div class="battle-stage">
+          <div class="battle-monster wild"><div class="monster-orb aqua">≈</div><strong>Brookit</strong><small>WILD · LV. 3</small><div class="hp-track"><i id="wild-hp"></i></div></div>
+          <div class="battle-monster player"><div class="monster-orb ember">✦</div><strong>Emberling</strong><small>YOUR CREATURE · LV. 5</small><div class="hp-track"><i id="player-hp"></i></div></div>
+        </div>
+        <p id="battle-log" class="battle-log">Choose a move to begin.</p>
+        <div id="battle-actions" class="battle-actions">
+          <button class="move-button" data-damage="12">Spark Tackle <small>12 power</small></button>
+          <button class="move-button" data-damage="8">Warm Pulse <small>8 power</small></button>
+        </div>
+        <button id="battle-done" class="button button-primary full hidden">Finish practice battle</button>
+        <p class="fine-print">Practice battle only. Results are not saved or rewarded in this starter build.</p>
+      </div>
+    </div>
+    <div id="toast" class="toast" role="status"></div>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
